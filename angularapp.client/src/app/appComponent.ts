@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
       .subscribe(result => {
 
 
-               debugger;
                this.forecasts = result;
                var logs = JSON.stringify(this.forecasts, null, 2);
 
