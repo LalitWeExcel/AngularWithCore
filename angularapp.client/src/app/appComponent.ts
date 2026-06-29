@@ -24,17 +24,31 @@ export class AppComponent implements OnInit {
 
   }
   private getForecasts(): void {
-    this.http.get<any[]>('/weatherforecast')
-      .subscribe(result => {
 
+    this.forecasts = [];
+    this.http.get<any[]>('/weatherforecast').subscribe({
+      next: (result) => {
 
-               this.forecasts = result;
-               var logs = JSON.stringify(this.forecasts, null, 2);
+        debugger;
+        this.forecasts = result;
 
-               console.log(this.forecasts.length);
-               console.log(logs);
-      });
+        const logs = JSON.stringify(this.forecasts, null, 2);
+
+        console.log(this.forecasts.length);
+        console.log(logs);
+
+      },
+      error: (err) => {
+        console.error('Error loading forecasts:', err);
+        debugger;
+        alert(err)
+
+      },
+      complete: () => {
+        console.log('Request completed.');
+      }
+    });
   }
 }
-  
+
 
